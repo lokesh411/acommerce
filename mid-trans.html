@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="SB-Mid-client-kT63E2l3sUNSo25k"></script>
+</head>
+
+<body>
+  <script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+  </script>
+  <script type="text/javascript">
+    const getQueryParams = (params, url) => {
+      let href = url;
+      //this expression is to get the query strings
+      let reg = new RegExp('[?&]' + params + '=([^&#]*)', 'i');
+      let queryString = reg.exec(href);
+      return queryString ? queryString[1] : null;
+    }; 
+    function closeView() {
+      MessengerExtensions.requestCloseBrowser(function success() {
+
+      }, function error(err) {
+
+      });
+    }
+    window.onload = () => {
+      let dataString = getQueryParams('data', window.location)
+      debugger;
+      let token = decodeURIComponent(dataString)
+      console.log('token is ::: ', token)
+      snap.pay(token, {
+        onSuccess: function (result) { console.log('success'); console.log(result); },
+        onPending: function (result) { console.log('pending'); console.log(result); },
+        onError: function (result) { console.log('error'); console.log(result); },
+        onClose: function () { console.log('customer closed the popup without finishing the payment'); }
+      });
+    }
+  </script>
+</body>
+
+</html>

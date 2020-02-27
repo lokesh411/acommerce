@@ -36,10 +36,10 @@
       let token = decodeURIComponent(dataString)
       console.log('token is ::: ', token)
       snap.pay(token, {
-        onSuccess: function (result) { console.log('success'); console.log(result); },
-        onPending: function (result) { console.log('pending'); console.log(result); },
-        onError: function (result) { console.log('error'); console.log(result); },
-        onClose: function () { console.log('customer closed the popup without finishing the payment'); }
+        onSuccess: function (result) { console.log('success'); console.log(result); closeView()},
+        onPending: function (result) { console.log('pending'); console.log(result); closeView()},
+        onError: function (result) { console.log('error'); console.log(result); closeView()},
+        onClose: function () { console.log('customer closed the popup without finishing the payment'); closeView()}
       });
     }
   </script>
